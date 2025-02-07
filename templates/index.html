@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصويت - هل مصطفى ممثل جيد؟</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>🎭 هل مصطفى ممثل جيد؟ 🎭</h1>
+    
+    <button onclick="vote('اي زين')">✅ اي زين</button>
+    <button onclick="vote('لا')">❌ لا</button>
+
+    <p id="message"></p>
+
+    <div class="footer">
+        🚀 تم تطوير الموقع بواسطة يوسف 🚀
+    </div>
+
+    <script>
+        function vote(choice) {
+            fetch('/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ choice: choice })
+            })
+            .then(response => response.json().then(data => ({ status: response.status, body: data })))
+            .then(result => {
+                if (result.status === 403) {
+                    document.getElementById('message').innerText = "❌ لقد قمت بالتصويت مسبقًا!";
+                } else {
+                    document.getElementById('message').innerText = "✅ تم تسجيل تصويتك بنجاح!";
+                    if (choice === 'لا') {
+                        let reason = prompt("❓ لماذا صوت بـ لا؟");
+                        if (reason) {
+                            alert("📝 شكراً لمشاركتك السبب: " + reason);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

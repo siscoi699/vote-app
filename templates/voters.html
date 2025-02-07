@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة المصوتين</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            margin: 20px auto;
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+        }
+        th {
+            background-color: gray;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>قائمة المصوتين</h1>
+    <table>
+        <tr>
+            <th>عنوان IP</th>
+            <th>الخيار المختار</th>
+        </tr>
+        {% for ip, choice in voters.items() %}
+        <tr>
+            <td>{{ ip }}</td>
+            <td>{{ choice }}</td>
+        </tr>
+        {% endfor %}
+        <style>
+            .footer {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 20px;
+                font-weight: bold;
+                color: yellow;
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 10px 20px;
+                border-radius: 10px;
+            }
+        </style>        
+    </table>
+
+    <div class="footer">
+        <h2>🚀 تم تطوير الموقع بواسطة يوسف 🚀</h2>
+    </div>    
+</body>
+</html>
